@@ -32,10 +32,13 @@ import (
 )
 
 const (
-	svcAcctCACertPath   = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
-	svcAcctTokenPath    = "/var/run/secrets/kubernetes.io/serviceaccount/token" // #nosec
 	defaultSecurePort   = "10250"
 	defaultReadOnlyPort = "10255"
+)
+
+var (
+	svcAcctCACertPath = fmt.Sprintf("%svar/run/secrets/kubernetes.io/serviceaccount/ca.crt", os.Getenv("CONTAINER_SANDBOX_MOUNT_POINT"))
+	svcAcctTokenPath  = fmt.Sprintf("%svar/run/secrets/kubernetes.io/serviceaccount/token", os.Getenv("CONTAINER_SANDBOX_MOUNT_POINT"))
 )
 
 type Client interface {
